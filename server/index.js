@@ -16,16 +16,16 @@ app.use((req, res, next)=>{
 // })
 app.get('/',(req,res)=>{
     console.log('hi someone accessed me')
-    db.list().then(data=>{
-        res.send(data)
+    db.list().then(d=>{
+        res.send({data:d})
     }).catch(err=>{
         res.send(err)
     })
 })
 app.post('/', (req,res)=>{
     newData = req.body
-    db.save(newData).then(data=>{
-        res.send(data)
+    db.save(newData).then(d=>{
+        res.send({data:d})
     }).catch(err=>{
         res.send(err)
     })
@@ -45,7 +45,7 @@ app.put('/',(req,res)=>{
         res.send('bad id')
     } else {
         db.update(id,data).then(d=>{
-            res.send(d)
+            res.send({data:d})
         }).catch(er=>{
             res.send(err)
         })

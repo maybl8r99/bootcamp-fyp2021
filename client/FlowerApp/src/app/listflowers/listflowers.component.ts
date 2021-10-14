@@ -22,8 +22,9 @@ export class ListflowersComponent implements OnInit {
   }
 
   loadDataFromServer() {
-    this.cs.list().subscribe(data=>{
-      console.log(data)
+    this.cs.list().subscribe(d=>{
+      this.myflowers=d['data']
+
     })
   }
   addMore() {
