@@ -1,0 +1,16 @@
+<h1>These are my flowers</h1>
+
+<ul>
+    <li *ngFor="let f of myflowers; index as i">
+        {{f.name}} ({{f.colour}}) <button (click)="delete(i)">X</button>
+    </li>
+</ul>
+
+<ul>
+    <li *ngFor="let f of myflowers">
+        <div>Name:<input [(ngModel)]="f.name"></div>
+    </li>
+    <li><button (click)="addMore()">Add More</button></li>
+</ul>
+
+<button (click)="loadDataFromServer()">Load</button>

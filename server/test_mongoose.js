@@ -20,14 +20,22 @@ connect().then(()=>{
 
 module.exports = {
     list: ()=>{
-        return new Promise((resolve,reject)=>{
+        return new Promise((success,fail)=>{
             mFlower.find({}).then(data=>{
-                resolve(data)
+                success(data)
             }).catch(err=>{
-                reject(err)
+                fail(err)
             })
-
         })
+    },
+    listx: ()=>{
+        let data = [{data:'nodata'}]
+        mFlower.find({}).then(d=>{
+            data = d
+        }).catch(err=>{
+            return err
+        })
+        return data
     },
     load: (key)=>{},
     save: (data)=>{

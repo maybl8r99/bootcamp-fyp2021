@@ -5,7 +5,17 @@ const app = express()
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
+app.use((req, res, next)=>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+// app.get('/',(req,res)=>{
+//     loadedData = db.list()
+//     res.send(loadedData)
+// })
 app.get('/',(req,res)=>{
+    console.log('hi someone accessed me')
     db.list().then(data=>{
         res.send(data)
     }).catch(err=>{
