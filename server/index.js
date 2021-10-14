@@ -7,7 +7,9 @@ app.use(express.json())
 
 app.use((req, res, next)=>{
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods","GET, PUT, POST, DELETE");
+    res.header("Access-Control-Allow-Headers", 
+    "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
 // app.get('/',(req,res)=>{
@@ -32,8 +34,10 @@ app.post('/', (req,res)=>{
 })
 app.delete('/',(req,res)=>{
     let id = req.query['id']
+    console.log(id)
     db.delete(id).then(d=>{
-        res.send('deleted')
+        console.log(d)
+        res.send({data:d})
     }).catch(err=>{
         res.send(err)
     })

@@ -1,4 +1,10 @@
 <h1>Welcome to my Flower Garden</h1>
+<!-- <div>
+    <div *ngFor="let f of xyz">{{f.name}}</div>
+</div> -->
+<ol>
+    <li *ngFor="let f of xyz">{{f['name']}}</li>
+</ol>
 <div>
     <a href="/list">List</a>
 </div>

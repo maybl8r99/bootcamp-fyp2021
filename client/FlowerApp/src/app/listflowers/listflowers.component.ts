@@ -1,5 +1,6 @@
+import { CssSelector } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { CommonService } from './../common.service';
+import { PostObject,CommonService } from './../common.service';
 
 @Component({
   selector: 'app-listflowers',
@@ -19,12 +20,12 @@ export class ListflowersComponent implements OnInit {
   constructor(private cs:CommonService) { }
 
   ngOnInit(): void {
+    this.loadDataFromServer()
   }
 
   loadDataFromServer() {
     this.cs.list().subscribe(d=>{
-      this.myflowers=d['data']
-
+      this.myflowers=(d as PostObject).data
     })
   }
   addMore() {
@@ -33,7 +34,27 @@ export class ListflowersComponent implements OnInit {
     })
   }
 
-  delete(i:any) {
-    delete this.myflowers[i]
+  isNew(o:any) {
+    let result = true
+    if ('_id' in o) {
+      result = false
+    }
+    return result
+  }
+  save(o:any) {
+    this.cs.save(o).subscribe(d=>{
+      this.loadDataFromServer()
+    })
+  }
+  update(o:any) {
+    let key = o['_id']
+    this.cs.update(key,o).subscribe(d=>{
+      this.loadDataFromServer()
+    })
+  }
+  delete(o:any) {
+    this.cs.delete(o['_id']).subscribe(d=>{
+      this.loadDataFromServer()
+    })
   }
 }

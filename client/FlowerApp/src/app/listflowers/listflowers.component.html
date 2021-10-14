@@ -2,13 +2,16 @@
 
 <ul>
     <li *ngFor="let f of myflowers; index as i">
-        {{f.name}} ({{f.colour}}) <button (click)="delete(i)">X</button>
+        {{f.name}} ({{f.colour}}) <button (click)="delete(f)">X</button>
     </li>
 </ul>
 
 <ul>
     <li *ngFor="let f of myflowers">
         <div>Name:<input [(ngModel)]="f.name"></div>
+        <div>Colour:<input [(ngModel)]="f.colour"></div>
+        <div *ngIf="isNew(f)"><button (click)="save(f)">Save</button></div>
+        <div *ngIf="!isNew(f)"><button (click)="update(f)">Update</button></div>
     </li>
     <li><button (click)="addMore()">Add More</button></li>
 </ul>

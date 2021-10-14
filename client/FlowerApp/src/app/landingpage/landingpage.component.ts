@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostObject,CommonService } from './../common.service'
 
 @Component({
   selector: 'app-landingpage',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingpageComponent implements OnInit {
 
-  constructor() { }
+  xyz = []
+  constructor(private cs:CommonService) { }
 
   ngOnInit(): void {
+    this.cs.list().subscribe(d=>{
+      this.xyz=(d as PostObject).data
+      console.log(this.xyz)
+    })
   }
 
 }
